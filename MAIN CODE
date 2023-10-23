@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Structure to store student information
+struct Student {
+    std::string name;
+    int rollNumber;
+    std::string emergencyContact;
+    std::string localAddress;
+    double internalMarks[4];
+    double externalMarks[4];
+};
+
+int main() {
+    std::vector<Student> studentDatabase;  // Vector to store student records
+
+    char continueInput = 'y';
+
+    while (continueInput == 'y' || continueInput == 'Y') {
+        Student student;
+
+        // Input student details
+        std::cout << "Enter Student Name: ";
+        std::cin.ignore();
+        std::getline(std::cin, student.name);
+
+        std::cout << "Enter Roll Number: ";
+        std::cin >> student.rollNumber;
+
+        std::cout << "Enter Emergency Contact Details: ";
+        std::cin.ignore();
+        std::getline(std::cin, student.emergencyContact);
+
+        std::cout << "Enter Local Address: ";
+        std::cin.ignore();
+        std::getline(std::cin, student.localAddress);
+
+        // Input marks for 4 subjects (internal and external assessments)
+        for (int i = 0; i < 4; i++) {
+            std::cout << "Enter Internal Marks for Subject " << i + 1 << ": ";
+            std::cin >> student.internalMarks[i];
+
+            std::cout << "Enter External Marks for Subject " << i + 1 << ": ";
+            std::cin >> student.externalMarks[i];
+        }
+
+        // Store the student record
+        studentDatabase.push_back(student);
+
+        std::cout << "Student information stored successfully!" << std::endl;
+
+        std::cout << "Do you want to enter information for another student? (y/n): ";
+        std::cin >> continueInput;
+    }
+
+    // Print all student records
+    std::cout << "All Student Records:\n";
+
+    for (const Student& student : studentDatabase) {
+        std::cout << "\nStudent Name: " << student.name << std::endl;
+        std::cout << "Roll Number: " << student.rollNumber << std::endl;
+        std::cout << "Emergency Contact Details: " << student.emergencyContact << std::endl;
+        std::cout << "Local Address: " << student.localAddress << std::endl;
+        std::cout << "Subject-wise Marks:\n";
+
+        for (int i = 0; i < 4; i++) {
+            std::cout << "Subject " << i + 1 << " Internal Marks: " << student.internalMarks[i] << std::endl;
+            std::cout << "Subject " << i + 1 << " External Marks: " << student.externalMarks[i] << std::endl;
+        }
+
+        std::cout << "-----------------------------------------\n";
+    }
+
+    return 0;
+}
